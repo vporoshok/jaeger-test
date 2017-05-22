@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  main:
+     build: .
+     command: go run main.go
+     volumes:
+       - .:/go/src/github.com/vporoshok/jaeger-test
+     ports:
+       - "8080:8080"
+     depends_on:
+       - jaeger
+       - rabbitmq
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    logging:
+      driver: none
+    ports:
+      - "16686:16686"
+
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    logging:
+      driver: none
+    ports:
+      - "5672:5672"
+      - "15672:15672"

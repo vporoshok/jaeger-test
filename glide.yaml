@@ -1,0 +1,13 @@
+package: github.com/vporoshok/zipkin-test
+import:
+- package: github.com/opentracing/opentracing-go
+  version: v1.0.2
+  subpackages:
+  - log
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: github.com/uber/jaeger-client-go
+  version: v2.6.0
+  subpackages:
+  - '...'
