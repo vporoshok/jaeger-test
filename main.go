@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"io"
 	"log"
 	"net/http"
@@ -12,11 +13,15 @@ import (
 	"time"
 
 	"github.com/opentracing/opentracing-go"
+	"github.com/vporoshok/jaeger-test/amqpService"
 	"github.com/vporoshok/jaeger-test/httpService"
-	"golang.org/x/net/context"
 
 	jaegerClientConfig "github.com/uber/jaeger-client-go/config"
 )
+
+type shutdowner interface {
+	Shutdown(context.Context) error
+}
 
 // Run http service on port 8080
 func Run() *http.Server {
@@ -26,7 +31,7 @@ func Run() *http.Server {
 
 		defer sp.Finish()
 
-		time.Sleep(200)
+		time.Sleep(200 * time.Millisecond)
 
 		httpClient := &http.Client{}
 		httpReq, _ := http.NewRequest("GET", "http://localhost:3001/", nil)
@@ -80,9 +85,10 @@ func main() {
 	}
 
 	log.Print("Run")
-	servers := map[string]interface{}{
+	servers := map[string]shutdowner{
 		"main": Run(),
 		"http": httpService.Run(),
+		"amqp": amqpService.Run(),
 	}
 
 	c := make(chan os.Signal, 1)

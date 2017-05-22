@@ -11,3 +11,4 @@ import:
   version: v2.6.0
   subpackages:
   - '...'
+- package: github.com/streadway/amqp

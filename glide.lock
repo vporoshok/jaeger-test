@@ -1,5 +1,5 @@
-hash: 596cc2c35ad0a7409d7c99ed4d0ed74e608ec5fe8cf4db5df896fa89791036a7
-updated: 2017-05-22T17:47:45.63777483+04:00
+hash: 0ddc87ccc0d9f6c9e78e72b814d9635fc2e28df35b470ca6e7017f88f8d7b269
+updated: 2017-05-22T20:15:03.778478209+04:00
 imports:
 - name: github.com/apache/thrift
   version: e41e47c2b4b2407bac525d203b281c63fb253978
@@ -12,6 +12,8 @@ imports:
   subpackages:
   - ext
   - log
+- name: github.com/streadway/amqp
+  version: dfe15e36048539f4cda41f240b27a5ca25b9cd46
 - name: github.com/uber/jaeger-client-go
   version: 465529424ed6b04a7fd2fcab6a9d6e96ea807fda
   subpackages:
